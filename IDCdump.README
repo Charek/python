@@ -1,0 +1,30 @@
+AUTHOR: charekc@ca.ibm.com/charek@gmail.com
+
+PURPOSE:
+IDCdump is a python script that connects to a IDC tenant environment generates javacores/heapdumps and downloads them
+It can only be used for SJC03 PP/QA envs with right credentials and connection.
+
+REQUIRES:
+1) VPN connection to SJC03 PP/QA and LDAP credentials
+
+2) Python and some libraries (pyyaml)
+
+3) Yaml file named IDCdump.yml with following entries
+New_Relic:
+  api_url: https://insights-api.newrelic.com/v1/accounts/1562984/query
+  api_key: <rest api key for above>
+LDAP:
+  username: <ldap usr>
+  password: <ldap pwd>
+
+USAGE: You must enter a proper string pattern to identify the tenant, env, stage and application
+Eg valid arguments
+./IDCdump.py 149879607854972716_production_live_crs-app
+./IDCdump.py 149879607854972716_production_live_ts-app
+./IDCdump.py 149879607854972716_production_live_search-app-slave
+
+TODOS:
+1. Error checking. VPN, timeout, no containers found etc
+2. verbose/status instead of pexpect output.
+3. Choose javacore and/or heapdump arguments. Ts-app
+4. Testing, Testing...
